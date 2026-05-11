@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Luxury fashion product",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "discountedPrice": { "type": "number" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "categoryId": { "type": "string" },
+        "stock": { "type": "number" },
+        "variants": {
+          "type": "object",
+          "properties": {
+            "sizes": { "type": "array", "items": { "type": "string" } },
+            "colors": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "status": { "type": "string", "enum": ["active", "draft", "out_of_stock"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price", "images", "categoryId"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "image": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["name"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerAddress": { "type": "string" },
+        "customerNotes": { "type": "string" },
+        "items": { "type": "array" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "processing", "delivered", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["customerName", "customerPhone", "customerAddress", "items", "total"]
+    },
+    "Banner": {
+      "title": "Banner",
+      "description": "Homepage banner",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "image": { "type": "string" },
+        "link": { "type": "string" },
+        "type": { "type": "string", "enum": ["hero", "promotional"] }
+      }
+    }
+  },
+  "firestore": {
+    "/products": { "schema": "Product", "description": "Collections of products" },
+    "/categories": { "schema": "Category", "description": "Product categories" },
+    "/orders": { "schema": "Order", "description": "Customer orders" },
+    "/banners": { "schema": "Banner", "description": "Homepage banners" }
+  }
+}
