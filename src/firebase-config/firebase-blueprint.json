@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Store products",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "discountBadge": { "type": "string" },
+        "images": { "type": "array" },
+        "category": { "type": "string" },
+        "variants": { "type": "object" },
+        "stock": { "type": "number" },
+        "sku": { "type": "string" },
+        "isFeatured": { "type": "boolean" },
+        "isTrending": { "type": "boolean" },
+        "isNewCollection": { "type": "boolean" },
+        "isFlashSale": { "type": "boolean" },
+        "flashSalePrice": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "price", "category", "sku"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer orders",
+      "type": "object",
+      "properties": {
+        "customer": { "type": "object" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "processing", "delivered", "cancelled"] },
+        "paymentMethod": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["customer", "items", "totalAmount", "status", "paymentMethod"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product categories",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "image": { "type": "string" }
+      },
+      "required": ["name"]
+    }
+  },
+  "firestore": {
+    "products": {
+      "schema": "#/entities/Product",
+      "description": "Collection of products"
+    },
+    "orders": {
+      "schema": "#/entities/Order",
+      "description": "Collection of customer orders"
+    },
+    "categories": {
+      "schema": "#/entities/Category",
+      "description": "Collection of product categories"
+    }
+  }
+}
